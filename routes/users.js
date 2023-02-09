@@ -40,7 +40,7 @@ User.findOne({ username: req.body.username }).then(data => {
 });
 
 router.post('/signin', (req, res) => {
-  if (!checkBody(req.body, ['firstname', 'username', 'password'])) {
+  if (!checkBody(req.body, ['username', 'password'])) {
     res.json({ result: false, error: "Il s'agirait de remplir tous les champs enfin !" });
     return;
 }
