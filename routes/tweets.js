@@ -21,7 +21,7 @@ router.get('/', function(req, res) {
 
 router.post('/add', function(req, res) {
     const { content } = req.body;
-    const tweet = new Tweet({ content });
+    const tweet = new Tweet({ content, author: req.user._id });
     tweet.save()
     .then(tweet => {
         res.json({tweet: tweet.content});
