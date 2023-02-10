@@ -2,7 +2,7 @@ const mongoose = require ('mongoose');
 
 const tweetSchema = new mongoose.Schema({
     firstname: String,
-    lastname: String,
+    username: String,
     content: String,
 });
 
