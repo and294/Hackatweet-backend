@@ -3,16 +3,14 @@ var router = express.Router();
 
 require('../models/connection');
 const Tweet = require('../models/tweets');
-const {checkBody } = require('../modules/checkBody');
 
 // GET all tweets
 
-router.get('/tweets', function(req, res) {
-    fetch('http://localhost:3000/tweets')
-    .then(response => response.json())
+router.get('/', function(req, res) {
+    Tweet.find()
     .then(data => {
         if (data) {
-            res.json({tweet: data.content});
+            res.json({tweet: data});
         } else {
             res.json({message: 'Twitter is down'});
         }
@@ -21,7 +19,7 @@ router.get('/tweets', function(req, res) {
 
 // POST a tweet
 
-router.post('/tweets', function(req, res) {
+router.post('/add', function(req, res) {
     const { content } = req.body;
     const tweet = new Tweet({ content });
     tweet.save()
@@ -35,7 +33,7 @@ router.post('/tweets', function(req, res) {
 
 // DELETE a tweet
 
-router.delete('/tweets/:id', function(req, res) {
+router.delete('/del/:id', function(req, res) {
     const { id } = req.params;
     Tweet.findByIdAndDelete(id)
     .then(tweet => {
