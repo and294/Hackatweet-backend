@@ -20,8 +20,10 @@ router.get('/', function(req, res) {
 // POST a tweet
 
 router.post('/add', function(req, res) {
-    const { content } = req.body;
-    const tweet = new Tweet({ content, author: req.user._id });
+    const { firstname, username, content } = req.body;
+
+    console.log(req.body);
+    const tweet = new Tweet({ firstname, username, content });
     tweet.save()
     .then(tweet => {
         res.json({tweet: tweet.content});
