@@ -1,4 +1,3 @@
-const cors = require('cors');
 require('dotenv').config();
 
 var express = require('express');
