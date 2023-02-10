@@ -35,8 +35,9 @@ router.post('/add', function(req, res) {
 
 // DELETE a tweet
 
-router.delete('/del', function(req, res) {
-    Tweet.deleteOne()
+router.delete('/del/:id', function(req, res) {
+    const { id } = req.params;
+    Tweet.deleteOne({id})
     .then(tweet => {
         res.json(tweet);
     })
