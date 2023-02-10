@@ -20,13 +20,14 @@ router.get("/", function (req, res) {
 
 router.post("/add", function (req, res) {
   const { firstname, username, content } = req.body;
-
-  console.log(req.body);
   const tweet = new Tweet({ firstname, username, content });
   tweet
     .save()
     .then((tweet) => {
-      res.json({ tweet: tweet.content });
+      Tweet.find().then((data) => {
+        console.log(data);
+        res.json({ tweets: data });
+      });
     })
     .catch((err) => {
       res.json({ message: "Twitter is down" });
@@ -35,11 +36,15 @@ router.post("/add", function (req, res) {
 
 // DELETE a tweet
 
-router.delete('/del/:id', function(req, res) {
-    const { id } = req.params;
-    Tweet.deleteOne({_id: id})
-    .then(tweet => {
-        res.json(tweet);
+router.delete("/del/:id", function (req, res) {
+  const { id } = req.params;
+  console.log(id);
+  Tweet.deleteOne({ _id: id })
+    .then((tweet) => {
+      Tweet.find().then((data) => {
+        console.log(data);
+        res.json({ tweets: data });
+      });
     })
     .catch((err) => {
       res.json({ message: "Twitter is down" });
