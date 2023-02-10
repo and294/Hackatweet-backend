@@ -35,9 +35,9 @@ router.post('/add', function(req, res) {
 
 router.delete('/del/:id', function(req, res) {
     const { id } = req.params;
-    Tweet.findByIdAndDelete(id)
+    Tweet.deleteOne({id})
     .then(tweet => {
-        res.json({tweet: tweet.content});
+        res.json(tweet);
     })
     .catch(err => {
         res.json({message: 'Twitter is down'});
